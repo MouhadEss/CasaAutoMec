@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <ui:composition>
+
+        <p:dialog  widgetVar="detailleDialog" appendTo="@(body)"  modal="true" showEffect="blind" hideEffect="explode" resizable="false">
+            <h:form id="detailleForm" rendered="true" >
+                <p:panelGrid rendered="#{passagerController.selectedVoyagedetaille.personne!=null}">
+
+                    <p:outputPanel id="voyageDetaille" style="text-align:center;">
+                        <h:outputText value="#{passagerController.selectedVoyagedetaille.personne.nom} 
+                                      #{passagerController.selectedVoyagedetaille.personne.prenom}" />
+                        <p:rating 
+                            value="#{rattingController.getValueOfpersonne(passagerController.selectedVoyagedetaille.personne)}" readonly="true" />
+                        <br/><br/>
+                        <img  src="http://bootdey.com/img/Content/avatar/avatar1.png" style="height: 100px;width: 100px; border-radius: 20px;"/><br/><br/>
+                        <h:outputText value=" fumeur :#{passagerController.selectedVoyagedetaille.personne.fumeur ?'oui':'non'}"/><br/><br/>
+
+                    </p:outputPanel>
+
+                </p:panelGrid>
+            </h:form>
+        </p:dialog>
+    </ui:composition>
+
+</html>
+

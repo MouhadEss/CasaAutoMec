@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <application>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundle</base-name>
+            <var>bundle</var>
+        </resource-bundle>
+<!--        <resource-handler>org.omnifaces.resourcehandler.CDNResourceHandler
+            <context-param>
+                <param-name>org.omnifaces.CDN_RESOURCE_HANDLER_URLS</param-name>
+                <param-value>
+                    cdn:mapConfig.js=https://maps.googleapis.com/maps/api/js?key=AIzaSyDB46dmUqg1tUNccv7y4nsBPSO0sBVRBOo&callback=initMap
+                </param-value>
+            </context-param>
+        </resource-handler>-->
+    </application>
+</faces-config>
