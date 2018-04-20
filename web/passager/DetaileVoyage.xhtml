@@ -29,9 +29,11 @@
             <h:form id="detailleVoyageForm" style="height: 500px;width: 400px;">
                 <p:panelGrid >
                     <h1>trajet voyage :</h1>
-                    <div id="map" style="border: solid;height: 400px;
-                         width: 100%;"></div>
-                         <p:gmap id="gmap" center="36.890257,30.707417" zoom="13" type="true"  model="#{passagerController.polylineModel}" style="width:400px;height:300px;" />
+                         <p:gmap id="gmap" center="31.791702,-7.0926207" 
+                                 zoom="6" type="true"  
+                                 model="#{passagerController.simpleModel}" 
+                                 style="width:400px;height:300px;" 
+                                 />
                          <h:outputText value="#{passagerController.selectedVoyagedetaille.id}"/>
                 </p:panelGrid>
             </h:form>
