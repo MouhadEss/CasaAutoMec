@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+       <h:form id="PassagerListFormSearch">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="100" >
+                        Ville Depart :
+                        <p:selectOneMenu value="#{passagerController.voyageAchercher.villeDepart}" >
+                            <f:selectItems value="#{villeController.items}"></f:selectItems>
+                        </p:selectOneMenu>
+                        ville Arriver :
+                        <p:selectOneMenu value="#{passagerController.voyageAchercher.villeArriver}" >
+                            <f:selectItems value="#{villeController.items}"></f:selectItems>
+                        </p:selectOneMenu>
+
+
+                        <p:outputLabel  value="la date :" />
+                        <p:calendar id="popup" value="#{passagerController.voyageAchercher.dateVoyage}"   >
+
+
+                        </p:calendar>
+                       
+
+                        <p:commandButton action="Resultat.xhtml" value="chercher" ></p:commandButton><br></br>
+                    </p:panelGrid>
+                </h:panelGroup>
+            </h:form>
+
+    </h:body>
+</html>
+
