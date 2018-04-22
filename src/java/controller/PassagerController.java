@@ -42,7 +42,7 @@ public class PassagerController implements Serializable {
     private VoyageFacade voyageFacade;
     @EJB
     private CircuitVoyageFacade cicuitFacade;
-    
+
     private List<Passager> items = null;
     private Passager selected;
     private Voyage voyageAchercher;
@@ -86,24 +86,23 @@ public class PassagerController implements Serializable {
 //
 //        polylineModel.addOverlay(polyline);
 //    }
-    
-    
-      
+    @PostConstruct
     public void init() {
         simpleModel = new DefaultMapModel();
         System.out.println(selectedVoyagedetaille);
-         List<Ville> villeCircuits = getCicuitFacade().getVilleCircuitByVoyage(selectedVoyagedetaille);
-         System.out.println(villeCircuits);
+        List<Ville> villeCircuits = getCicuitFacade().getVilleCircuitByVoyage(selectedVoyagedetaille);
+        villeCircuits.add(selectedVoyagedetaille.getVilleArriver());
+        System.out.println(villeCircuits);
         //Shared coordinates
-          for (Ville villeCircuit : villeCircuits) {
-              simpleModel.addOverlay(new Marker(new LatLng(new Double(villeCircuit.getLat()),new Double(villeCircuit.getLang()))
-                                                ,""+villeCircuit.getNom()));
-          }
-            
+        for (Ville villeCircuit : villeCircuits) {
+            simpleModel.addOverlay(new Marker(new LatLng(new Double(villeCircuit.getLat()), new Double(villeCircuit.getLang())),
+                    "" + villeCircuit.getNom()));
+        }
+
     }
 
     public MapModel getPolylineModel() {
-       
+
         return polylineModel;
     }
 
@@ -129,15 +128,13 @@ public class PassagerController implements Serializable {
     }
 
     public DefaultMapModel getSimpleModel() {
-        init();
+
         return simpleModel;
     }
 
     public void setSimpleModel(DefaultMapModel simpleModel) {
         this.simpleModel = simpleModel;
     }
-    
-    
 
     public int getUntiteBagage() {
         return untiteBagage;
