@@ -8,7 +8,9 @@ package service;
 import bean.CircuitVoyage;
 import bean.Ville;
 import bean.Voyage;
+import java.util.ArrayList;
 import java.util.List;
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,14 +30,24 @@ public class CircuitVoyageFacade extends AbstractFacade<CircuitVoyage> {
         return em;
     }
 
+    @EJB
+    service.VoyageFacade voyageFacade;
+
     public CircuitVoyageFacade() {
         super(CircuitVoyage.class);
     }
-    
-    public List<Ville> getVilleCircuitByVoyage(Voyage voyage){
-        return  getEntityManager().createQuery("select DISTINCT c.villeDep,c.villeArr "
-                + "from CircuitVoyage c where c.voyage.id="+voyage.getId()+"")
+
+    public List<Ville> getVilleCircuitByVoyage(Voyage voyage) {
+
+        List<Ville> villes = new ArrayList();
+        villes = getEntityManager().createQuery("select DISTINCT c.villeDep "
+                + "from CircuitVoyage c where c.voyage.id=" + voyage.getId() + "")
                 .getResultList();
+
+//        System.out.println(voyage.getVilleArriver());
+
+        System.out.println(villes);
+        return villes;
     }
-    
+
 }

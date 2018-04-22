@@ -60,53 +60,51 @@
                 <div class="container-resultat-searche" style="position: absolute;left: 30%;width: 400px;" >
                     <!--<p-paginator rows="1" totalRecords="100" pageLinkSize="3">-->
 
-                        <p:repeat value="#{passagerController.voyages}" var="item" id="repeat" >
-                            <section class="search-result-item">
-                                <h:panelGrid columns="11" cellpadding="10"  >
-                                    <h:panelGrid columns="2"> 
-                                        <img  src="http://bootdey.com/img/Content/avatar/avatar1.png" style="height: 100px;width: 100px; border-radius: 20px;"/>
-
-
-                                        <p:commandLink   
-                                            update="detailleForm"
-                                            oncomplete="PF('detailleDialog').show()"
-                                            class="user-info">
-                                            <f:setPropertyActionListener value="#{item}" target="#{passagerController.selectedVoyagedetaille}" />
-                                            <h:outputText value="#{item.personne.nom}  #{item.personne.prenom}" style="font-weight: bold"/>
-                                        </p:commandLink>
-                                        <p:rating stars="4"
-                                                  value="#{rattingController.getValueOfpersonne(item.personne)}" readonly="true" />
-                                    </h:panelGrid>
-                                    <h:panelGroup>
-                                        <h:outputText value="ville de depart :" />
-                                        <h:outputText value="#{item.villeDepart.nom}" style="font-weight: bold"/>
-                                    </h:panelGroup>
-                                    <h:panelGroup>
-                                        <h:outputText value="ville d'arriver :" />
-                                        <h:outputText value="#{item.villeArriver.nom}" style="font-weight: bold"/></h:panelGroup>
-                                    <h:panelGroup>
-                                        <h:outputText value="date Voyage :" />
-                                        <h:outputText value="#{item.dateVoyage}" style="font-weight: bold">
-                                            <f:convertDateTime pattern="dd/MM/YYY" />
-                                        </h:outputText>
-                                    </h:panelGroup>
-                                    <div class="col-sm-3 text-align-center">
-                                        <p class="value3 mt-sm">
-                                            <h:outputText value="prix : #{item.prix}" style="font-weight: bold"/>
-                                            <p:commandLink   
-                                                update="detailleVoyageForm"
-                                                oncomplete="PF('detailleVoyageDialog').show()"
-                                                class="user-info"
-                                                value="voir detaille">
-                                                <f:setPropertyActionListener value="#{item}" target="#{passagerController.selectedVoyagedetaille}" />
-
-                                            </p:commandLink>
-
-                                        </p>
-                                    </div>
+                    <p:repeat value="#{passagerController.voyages}" var="item" id="repeat" >
+                        <section class="search-result-item">
+                            <h:panelGrid columns="11" cellpadding="10"  >
+                                <h:panelGrid columns="2"> 
+                                    <img  src="http://bootdey.com/img/Content/avatar/avatar1.png" style="height: 100px;width: 100px; border-radius: 20px;"/>
+                                    <p:commandLink   
+                                        update="detailleForm"
+                                        oncomplete="PF('detailleDialog').show()"
+                                        class="user-info">
+                                        <f:setPropertyActionListener value="#{item}" target="#{passagerController.selectedVoyagedetaille}" />
+                                        <h:outputText value="#{item.personne.nom}  #{item.personne.prenom}" style="font-weight: bold"/>
+                                    </p:commandLink>
+                                    <p:rating stars="4"
+                                              value="#{rattingController.getValueOfpersonne(item.personne)}" readonly="true" />
                                 </h:panelGrid>
-                            </section>
-                        </p:repeat>
+                                <h:panelGroup>
+                                    <h:outputText value="ville de depart :" />
+                                    <h:outputText value="#{item.villeDepart.nom}" style="font-weight: bold"/>
+                                </h:panelGroup>
+                                <h:panelGroup>
+                                    <h:outputText value="ville d'arriver :" />
+                                    <h:outputText value="#{item.villeArriver.nom}" style="font-weight: bold"/></h:panelGroup>
+                                <h:panelGroup>
+                                    <h:outputText value="date Voyage :" />
+                                    <h:outputText value="#{item.dateVoyage}" style="font-weight: bold">
+                                        <f:convertDateTime pattern="dd/MM/YYY" />
+                                    </h:outputText>
+                                </h:panelGroup>
+                                <div class="col-sm-3 text-align-center">
+                                    <p class="value3 mt-sm">
+                                        <h:outputText value="prix : #{item.prix}" style="font-weight: bold"/>
+                                        <p:commandLink
+                                            process="@this"
+                                            update="detailleVoyageForm"
+                                            oncomplete="PF('detailleVoyageDialog').show()"
+                                            value="voir detaille">
+                                            <f:setPropertyActionListener value="#{item}" target="#{passagerController.selectedVoyagedetaille}" />
+
+                                        </p:commandLink>
+
+                                    </p>
+                                </div>
+                            </h:panelGrid>
+                        </section>
+                    </p:repeat>
                     <!--</p-paginator>-->
                     <h:outputText value="#{passagerController.voyages.isEmpty() ?'no data found':''}"></h:outputText>
                 </div>

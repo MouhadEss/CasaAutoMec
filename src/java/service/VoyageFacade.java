@@ -39,6 +39,12 @@ public class VoyageFacade extends AbstractFacade<Voyage> {
         super.create(voyage);
         
     }
+     public Ville getFinaleVille(Voyage voyage){
+       
+        return  (Ville) getEntityManager()
+                .createQuery("select v.villeArriver from Voyage v where v.id="+voyage.getId()+"")
+                .getSingleResult();
+    }
     
      public List<Voyage> chercherInVoyage(Ville villeDep, Ville villeArr, Date dateVoyage,Double prixMax,Double prixMin) {
       
