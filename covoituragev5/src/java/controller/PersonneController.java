@@ -38,10 +38,10 @@ public class PersonneController implements Serializable {
         if (res == 1) {
             System.out.println("hqnqdkhalt");
             SessionUtil.setAttribute("connectedUser", ejbFacade.findPersonneById(selected.getEmail()));
-            return "/circuitVoyage/proposerCircuit.xhtml";
+            return "/template_1.xhtml";
         } else {
             System.out.println("hanadkhalt");
-            return "/user/Login.xhtml";
+            return "/index.xhtml";
         }
     }
 

@@ -9,6 +9,7 @@ import bean.BagagePricing;
 import bean.BagageVoyage;
 import bean.CircuitVoyage;
 import bean.Place;
+import bean.Ville;
 import bean.Voyage;
 import java.util.List;
 import javax.ejb.EJB;
@@ -54,13 +55,14 @@ public class CircuitVoyageFacade extends AbstractFacade<CircuitVoyage> {
        bagagePricingFacade.create(bagagePricing);
        
        
-       
         
         for (CircuitVoyage circuitVoyage : circuitVoyages) {
-            place.setId(generateId("Place", "id"));
-            placeFacade.create(place);
+            
+            Place pl=placeFacade.cloonnage(place);
+            placeFacade.create(pl);
+            
             circuitVoyage.setId(generateId("CircuitVoyage", "id"));
-            circuitVoyage.setPlace(place);
+            circuitVoyage.setPlace(pl);
             circuitVoyage.setVoyage(voyage);
             create(circuitVoyage);
             
@@ -90,6 +92,12 @@ public class CircuitVoyageFacade extends AbstractFacade<CircuitVoyage> {
         CircuitVoyage clooner = new CircuitVoyage();
         cloner(circuitVoyage, clooner);
         return clooner;
+    }
+    
+    public List<Ville> getVilleCircuitByVoyage(Voyage voyage){
+        return  getEntityManager().createQuery("select DISTINCT c.villeDep,c.villeArr "
+                + "from CircuitVoyage c where c.voyage.id="+voyage.getId()+"")
+                .getResultList();
     }
 
 }

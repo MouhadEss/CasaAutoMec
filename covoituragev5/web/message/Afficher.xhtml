@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="/template.xhtml">
+
+         <ui:define name="body">
+             <h:form id="afficher"> 
+             
+                 
+                         <h1><h:outputText value="List"/></h1>
+                         <p:dataTable value="#{messageController.itemsAfficher}" var="item">
+                             
+                             <p:column>
+                                 <f:facet name="header">
+                                     <h:outputText value="DateMessage"/>
+                                 </f:facet>
+                                 <h:outputText value="#{item.dateMessage}">
+                                     <f:convertDateTime pattern="MM/dd/yyyy" />
+                                 </h:outputText>
+                             </p:column>
+                             <p:column>
+                                 <f:facet name="header">
+                                     <h:outputText value="Objet"/>
+                                 </f:facet>
+                                 <h:outputText value="#{item.objet}"/>
+                             </p:column>
+                             <p:column>
+                                 <f:facet name="header">
+                                     <h:outputText value="Contenu"/>
+                                 </f:facet>
+                                 <h:outputText value="#{item.contenu}"/>
+                             </p:column>
+                               <p:column>
+                                 <f:facet name="header">
+                                     <h:outputText value="lire"/>
+                                 </f:facet>
+                                   <h:commandButton value="lire"></h:commandButton>
+                             </p:column>  
+                         </p:dataTable>
+                      
+
+             
+             </h:form>
+</ui:define>
+</ui:composition>
+
+</html>
+

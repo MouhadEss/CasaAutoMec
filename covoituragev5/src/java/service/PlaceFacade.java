@@ -29,8 +29,17 @@ public class PlaceFacade extends AbstractFacade<Place> {
         super(Place.class);
     }
     
+    public Place cloonnage(Place place){
+        Place pl= new Place();
+        pl.setAv(place.isAv());
+        pl.setArrMilieu(place.isArrMilieu());
+        pl.setArrGauche(place.isArrGauche());
+        pl.setArrDroite(place.isArrDroite());
+        return pl;
+    }
+    
     public void create(Place place){
-        
+        place.setId(generateId("Place", "id"));
         super.create(place);
     }
 }

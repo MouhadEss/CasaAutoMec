@@ -64,6 +64,7 @@ public class VoyageFacade extends AbstractFacade<Voyage> {
             query+=" and (v.prix > "+prixMin+" or c.prix > "+prixMin+" ) )";
        
         System.out.println(query);
+         System.out.println(getEntityManager().createQuery(query).getResultList());
         return  getEntityManager().createQuery(query).getResultList();
     }
 }

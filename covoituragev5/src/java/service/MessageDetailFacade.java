@@ -29,4 +29,17 @@ public class MessageDetailFacade extends AbstractFacade<MessageDetail> {
         super(MessageDetail.class);
     }
     
+    @Override
+    public void create(MessageDetail messageDetail){
+        messageDetail.setId(generateId("MessageDetail", "id"));
+        super.create(messageDetail);
+        
+    }
+    
+    public MessageDetail clonage(MessageDetail messageDetail){
+        MessageDetail clonner=new MessageDetail();
+        clonner.setPersonne(messageDetail.getPersonne());
+        return clonner;
+    }
+    
 }

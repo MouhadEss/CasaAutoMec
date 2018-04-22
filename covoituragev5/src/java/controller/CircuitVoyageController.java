@@ -5,10 +5,12 @@ import bean.BagageVoyage;
 import bean.CircuitVoyage;
 import bean.Marque;
 import bean.Model;
+import bean.Personne;
 import bean.Place;
 import bean.Voyage;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
+import controller.util.SessionUtil;
 import service.CircuitVoyageFacade;
 
 import java.io.Serializable;
@@ -37,6 +39,7 @@ public class CircuitVoyageController implements Serializable {
     private service.ModelFacade modelFacade;
     private List<Model> models = new ArrayList();
     private List<CircuitVoyage> items = new ArrayList();
+    private List<Place> places = new ArrayList();
     private CircuitVoyage selected;
     private Voyage voyage;
     private Marque marque;
@@ -62,6 +65,8 @@ public class CircuitVoyageController implements Serializable {
     }
 
     public void createT() {
+        place.setId(null);
+        voyage.setPersonne((Personne) SessionUtil.getAttribute("connectedUser"));
         ejbFacade.create(voyage, items, bagageVoyage, bagagePricing, place);
     }
 

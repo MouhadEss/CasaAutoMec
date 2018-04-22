@@ -12,7 +12,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -23,7 +22,6 @@ public class Place implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private boolean av;
     private boolean arrGauche;
@@ -39,6 +37,16 @@ public class Place implements Serializable {
     public Place() {
     }
 
+    public List<CircuitVoyage> getCircuitVoyages() {
+        return circuitVoyages;
+    }
+
+    public void setCircuitVoyages(List<CircuitVoyage> circuitVoyages) {
+        this.circuitVoyages = circuitVoyages;
+    }
+
+    
+    
     public boolean isAv() {
         return av;
     }

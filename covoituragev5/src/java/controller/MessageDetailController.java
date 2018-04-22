@@ -1,11 +1,13 @@
 package controller;
 
+import bean.Message;
 import bean.MessageDetail;
 import controller.util.JsfUtil;
 import controller.util.JsfUtil.PersistAction;
 import service.MessageDetailFacade;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -18,6 +20,7 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
+import service.MessageFacade;
 
 @Named("messageDetailController")
 @SessionScoped
@@ -25,13 +28,58 @@ public class MessageDetailController implements Serializable {
 
     @EJB
     private service.MessageDetailFacade ejbFacade;
-    private List<MessageDetail> items = null;
+    @EJB
+    private service.MessageFacade messageFacad;
+    @EJB
+    private service.PersonneFacade personneFacad;
+    private List<MessageDetail> items = new ArrayList();
     private MessageDetail selected;
+    private Message selectedMessage;
 
     public MessageDetailController() {
     }
 
+    public void addListSelect() {
+        items.add(ejbFacade.clonage(selected));
+    }
+    
+    public void createMessage(){
+        getSelectedMessage().setPersonne(personneFacad.find("test@gmail.com"));
+        getMessageFacad().createMessage(selectedMessage, items);
+        
+    }
+
+    public Message getSelectedMessage() {
+        if(selectedMessage==null)
+            selectedMessage = new Message();
+        return selectedMessage;
+    }
+
+    public void setSelectedMessage(Message selectedMessage) {
+        this.selectedMessage = selectedMessage;
+    }
+    
+    public MessageDetailFacade getEjbFacade() {
+        return ejbFacade;
+    }
+
+    public void setEjbFacade(MessageDetailFacade ejbFacade) {
+        this.ejbFacade = ejbFacade;
+    }
+
+    public MessageFacade getMessageFacad() {
+        return messageFacad;
+    }
+
+    public void setMessageFacad(MessageFacade messageFacad) {
+        this.messageFacad = messageFacad;
+    }
+
+    
     public MessageDetail getSelected() {
+        if (selected == null) {
+            selected = new MessageDetail();
+        }
         return selected;
     }
 
