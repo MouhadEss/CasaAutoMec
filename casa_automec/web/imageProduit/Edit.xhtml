@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ImageProduitEditDlg" widgetVar="ImageProduitEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditImageProduitTitle}">
+            <h:form id="ImageProduitEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{imageProduitController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditImageProduitLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{imageProduitController.selected.id}" title="#{bundle.EditImageProduitTitle_id}" />
+                        <p:outputLabel value="#{bundle.EditImageProduitLabel_img}" for="img" />
+                        <p:inputText id="img" value="#{imageProduitController.selected.img}" title="#{bundle.EditImageProduitTitle_img}" />
+                        <p:outputLabel value="#{bundle.EditImageProduitLabel_produit}" for="produit" />
+                        <p:selectOneMenu id="produit" value="#{imageProduitController.selected.produit}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{produitController.itemsAvailableSelectOne}"
+                                           var="produitItem"
+                                           itemValue="#{produitItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{imageProduitController.update}" value="#{bundle.Save}" update="display,:ImageProduitListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ImageProduitEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ImageProduitEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

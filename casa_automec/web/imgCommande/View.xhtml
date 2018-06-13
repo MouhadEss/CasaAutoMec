@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ImgCommandeViewDlg" widgetVar="ImgCommandeViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewImgCommandeTitle}">
+            <h:form id="ImgCommandeViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{imgCommandeController.selected != null}">
+                        <h:outputText value="#{bundle.ViewImgCommandeLabel_client}"/>
+                        <h:outputText value="#{imgCommandeController.selected.client}" title="#{bundle.ViewImgCommandeTitle_client}"/>
+                        <h:outputText value="#{bundle.ViewImgCommandeLabel_dateCmd}"/>
+                        <h:outputText value="#{imgCommandeController.selected.dateCmd}" title="#{bundle.ViewImgCommandeTitle_dateCmd}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewImgCommandeLabel_dateVue}"/>
+                        <h:outputText value="#{imgCommandeController.selected.dateVue}" title="#{bundle.ViewImgCommandeTitle_dateVue}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewImgCommandeLabel_name}"/>
+                        <h:outputText value="#{imgCommandeController.selected.name}" title="#{bundle.ViewImgCommandeTitle_name}"/>
+                        <h:outputText value="#{bundle.ViewImgCommandeLabel_id}"/>
+                        <h:outputText value="#{imgCommandeController.selected.id}" title="#{bundle.ViewImgCommandeTitle_id}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ImgCommandeViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../client_template.xhtml">
+
+        <ui:define name="titleBody">Commande image:</ui:define>
+
+        <ui:define name="body">
+            <h:form  enctype="multipart/form-data" >
+                <div class=" card mb-3">
+                    <div class="card-header">
+                        Entrer votre Image:
+                    </div>
+                    <div class="card-body">
+                        <p:fileUpload fileUploadListener="#{imgCommandeController.handleFileUpload}" mode="advanced" dragDropSupport="false"
+                                      multiple="true" update="messages" sizeLimit="10000000" fileLimit="10" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                        <p:growl id="messages" showDetail="true" />
+                        <br></br>
+                        <br></br>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <h:outputLabel value="Ajouter Un Commentaire:&nbsp;"/>
+                            </div>
+                            <div class="col-xs-8">
+                                <h:inputTextarea value="#{imgCommandeController.selected.commentaire}" rows="3" cols="124"    />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <h:commandButton value="Envoyer" actionListener="#{imgCommandeController.creerImg()}"  class="btn btn-primary btn-block"/>
+                    </div>
+                </div>
+
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+</html>
+

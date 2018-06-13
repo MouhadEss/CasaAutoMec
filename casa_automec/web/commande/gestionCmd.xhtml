@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../admin_template.xhtml">
+
+        <ui:define name="body">
+
+
+
+            <h:form id="tableCmd">
+
+                <div  class="panel panel-default">
+
+                    <div class="panel-heading">Les commandes a traitées:</div>
+                    <div class="panel-body">
+                        <h:dataTable value="#{commandeController.itemsNonTAdmin}" var="item" class="table">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Numéro de commande"/>
+                                </f:facet>
+                                <h:outputText value="#{item.id}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Id du Client"/>
+                                </f:facet>
+                                <h:outputText value="#{item.client.idClient}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Date du commande"/>
+                                </f:facet>
+                                <h:outputText value="#{item.datecommande}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <p:commandButton class="btn btn-success btn-circle" icon="fa fa-th-list" actionListener="#{commandeController.detailsNonTAdmin(item)}" update=":tableCmdItems" />
+
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </h:form>
+
+
+            <h:form id="tableCmdItems">
+
+                <div  class="panel panel-default">
+
+                    <div class="panel-heading">Les produits du commande:</div>
+                    <div class="panel-body">
+                        <h:dataTable value="#{commandeController.selectedNonTAdmin.commandeItems}" var="item" class="table">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Produit"/>
+                                </f:facet>
+                                <h:outputText value="#{item.produit.reference}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NbrProduit"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nbrProduit}"/>
+                            </h:column>
+                            <h:column>
+
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </h:form>
+
+
+
+
+        </ui:define>
+
+    </ui:composition>
+</html>
+

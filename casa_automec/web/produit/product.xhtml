@@ -1,0 +1,253 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:composition template="../admin_template.xhtml">
+        <ui:define name="title-page">Gestion du produit</ui:define>
+        <ui:define name="body">
+
+
+
+            <div  class="panel panel-default">
+
+                <div class="panel-heading">Creation d'un nouveau type de véhicule</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <h:form id="displayV">
+                                <div class="col-xs-5">
+
+                                    <label  for="search">Entrer le nom du type:</label>
+                                    <p:inputText class="form-control" placeholder="Create" value="#{produitController.typeV.vehicule}"/>
+                                </div>
+                                <div class="col-xs-1">
+                                    <label for="butt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    &nbsp;&nbsp;<p:commandButton id="butt" class="btn btn-info btn-circle" icon="fa fa-save" actionListener="#{produitController.createV()}" update="displayV,:comboV,:growl"  />
+                                </div>
+                            </h:form>
+                            <h:form id="comboV">
+                                <div class="col-xs-4 ">
+                                    <label for="chercher">Les Types existant:</label>
+                                    <h:selectOneMenu id="chercher" value="#{produitController.typeV}" class="form-control" >
+                                        <f:selectItem value="#{null}" itemLabel="    "/>
+                                        <f:selectItems value="#{produitController.itemsV}" var="item" itemLabel="#{item.vehicule}" itemValue="#{item}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label for="butt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <p:commandButton class="btn btn-warning btn-circle" icon="fa fa-times"  oncomplete="PF('TypeVehiculeSuppDialog').show()" />
+                                    <p:commandButton class="btn btn-primary btn-circle" icon="fa fa-edit" actionListener="#{produitController.editerV()}" update=":displayV,:growl,chercher"   />
+
+                                </div>
+                            </h:form>
+                                <ui:include src="../typeVehicule/deleteTV.xhtml"/>
+                                <ui:include src="../typeProduit/deleteTP.xhtml"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div  class="panel panel-default">
+
+                <div class="panel-heading">Creation d'un nouveau type de produit</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <div class="row">
+                            <h:form id="displayP">
+                                <div class="col-xs-3">
+                                    <label for="typV">Choisir le type de vehicule:</label>
+                                    <h:selectOneMenu id="typeV" value="#{produitController.typeP.typeVehicule}" class="form-control" disabled="#{produitController.disabled}">
+                                        <f:selectItem value="#{null}" itemLabel="    "/>
+                                        <f:selectItems value="#{produitController.itemsV}" var="item" itemLabel="#{item.vehicule}" itemValue="#{item}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="col-xs-3">
+
+                                    <label  for="search">Entrer le nom du type:</label>
+                                    <p:inputText class="form-control" placeholder="Create" value="#{produitController.typeP.type}"/>
+                                </div>
+                                <div class="col-xs-1">
+                                    <label for="butt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    &nbsp;&nbsp;<p:commandButton id="buttP" class="btn btn-info btn-circle" icon="fa fa-save" actionListener="#{produitController.createTP()}" update="displayP,:comboP,:growl"  />
+                                </div>
+                            </h:form>
+                            <h:form id="comboP">
+                                <div class="col-xs-3 ">
+                                    <label for="chercherP">Les Types existant:</label>
+                                    <h:selectOneMenu id="chercherP" value="#{produitController.typeP}" class="form-control" >
+                                        <f:selectItem value="#{null}" itemLabel="    "/>
+                                        <f:selectItems value="#{produitController.itemsP}" var="item" itemLabel="#{item.type}" itemValue="#{item}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="col-xs-2">
+                                    <label for="butt">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <p:commandButton class="btn btn-warning btn-circle" icon="fa fa-times"  oncomplete="PF('TypePSuppDialog').show()"  />
+                                    <p:commandButton class="btn btn-primary btn-circle" icon="fa fa-edit" actionListener="#{produitController.editerP()}" update=":displayP,:growl,chercherP"   />
+
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div  class="panel panel-default">
+
+                <div class="panel-heading">Creation d'un nouveau produit:</div>
+                <div class="panel-body">
+                    <h:form id="display">
+
+                        <div class="form-group">
+                            <label for="exampleInputId">La réference</label>
+                            <p:inputText value="#{produitController.selected.reference}" class="form-control" id="exampleInputId" placeholder="Enter réference" readonly="#{produitController.readonlyp}" />
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="exampleInputName">Le nombre de piéces en stoque</label>
+                                    <p:inputText value="#{produitController.selected.nbrStock}" type="number" class="form-control" id="exampleInputName" placeholder="Enter number"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="exampleInputLastName">Prix</label>
+                                    <p:inputText value="#{produitController.selected.prix}" class="form-control" id="exampleInputLastName" placeholder="Enter Price"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="typeVe">Type de produit</label>
+                                    <h:selectOneMenu value="#{produitController.typeV}" class="form-control" id="typeVe">
+                                        <p:ajax process="typeVe" listener="#{produitController.findTypePbyV()}" update="exampleInputAdresse"/>
+                                        <f:selectItem value="#{null}" itemLabel="    "/>
+                                        <f:selectItems value="#{typeVehiculeController.itemsAvailableSelectOne}" var="item" itemValue="#{item}" itemLabel="#{item.vehicule}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="exampleInputAdresse">Type de produit</label>
+                                    <h:selectOneMenu value="#{produitController.selected.typeProduit}" class="form-control" id="exampleInputAdresse">
+                                        <f:selectItem value="#{null}" itemLabel="    "/>
+                                        <f:selectItems value="#{produitController.itemsP}" var="item" itemValue="#{item}" itemLabel="#{item.type}"/>
+                                    </h:selectOneMenu>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Description sur le produit</label>
+                            <p:inputTextarea value="#{produitController.selected.description}" class="form-control" id="exampleInputEmail1"  placeholder="Enter discription"/>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3">
+                                    <p:commandButton value="Save" actionListener="#{produitController.createP()}" class="btn btn-primary btn-block" update="display,:table,:upload" />
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                    <div class="text-center">
+                    </div>
+                    <h:form id="upload" enctype="multipart/form-data">
+                        <div  class="panel panel-default">
+
+                            <div class="panel-heading">Ajouter des photos pour votre produit créer:<h:outputText value="#{produitController.justcreated.reference}"/></div>
+                            <div class="panel-body">
+                                <div class="col-md-12">
+
+                                    <p:fileUpload fileUploadListener="#{produitController.handleFileUpload}" mode="advanced" dragDropSupport="false" disabled="#{produitController.uploadp}"
+                                                  multiple="true" update="messages" sizeLimit="10000000" fileLimit="10" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+                                    <p:growl id="messages" showDetail="true" />
+                                </div>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+
+            <h:form id="table">
+
+                <div  class="panel panel-default">
+
+                    <div class="panel-heading">Les produits existants:</div>
+                    <div class="panel-body">
+
+
+                        <h:dataTable value="#{produitController.items}" var="item" class="table">
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Reference"/>
+                                </f:facet>
+                                <h:outputText value="#{item.reference}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="NbrStock"/>
+                                </f:facet>
+                                <h:outputText value="#{item.nbrStock}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Prix"/>
+                                </f:facet>
+                                <h:outputText value="#{item.prix}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Type de Vehicule"/>
+                                </f:facet>
+                                <h:outputText value="#{item.typeProduit.typeVehicule.vehicule}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="TypeProduit"/>
+                                </f:facet>
+                                <h:outputText value="#{item.typeProduit.type}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Remise"/>
+                                </f:facet>
+                                <h:outputText value="#{item.remise}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="Description"/>
+                                </f:facet>
+                                <h:outputText value="#{item.description}"/>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+                                    <h:outputText value="DateAjout"/>
+                                </f:facet>
+                                <h:outputText value="#{item.dateAjout}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </h:column>
+                            <h:column>
+                                <f:facet name="header">
+
+                                </f:facet>
+                                <p:commandButton class="btn btn-warning btn-circle" icon="fa fa-times" actionListener="#{produitController.supprimerProduit(item)}" update=":display,:table,:growl" />
+                                <p:commandButton class="btn btn-primary btn-circle" icon="fa fa-edit" actionListener="#{produitController.editProduit(item)}" update=":display" />
+
+                            </h:column>
+                        </h:dataTable>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+</html>
+

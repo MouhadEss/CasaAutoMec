@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+   <ui:composition >
+
+        <p:dialog id="TypePeSuppDlg" widgetVar="TypePSuppDialog" modal="true" resizable="false" appendTo="@(body)" header="ATTENTION!!">
+            <h:form>
+                <div class="panel panel-red">
+                    <div class="panel-heading">
+                        Red Panel
+                    </div>
+                    <div class="panel-body">
+                        <p>Etes vous sur de votre choix de la suppression de ce type produit!!<br></br>Cette action va <strong>SUPPRIMER</strong> tout les produits de ce type produit</p>
+                    </div>
+                    <div class="panel-footer">
+                        <p:commandButton class="btn btn-primary btn-lg btn-block" actionListener="#{produitController.supprimerTP()}" value="Supprimer Quand meme" update=":comboP,:display,:table,:growl" oncomplete="handleSubmit(args,'TypePSuppDialog');"/>
+
+                    </div>
+                </div>
+            </h:form>
+        </p:dialog>
+
+
+
+    </ui:composition>
+</html>
+

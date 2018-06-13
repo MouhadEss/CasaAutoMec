@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"></meta>
+        <meta name="description" content=""></meta>
+        <meta name="author" content=""></meta>
+        <title>SB Admin - Start Bootstrap Template</title>
+        <!-- Bootstrap core CSS-->
+        <link href="../resources/resources_client/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"></link>
+        <!-- Custom fonts for this template-->
+        <link href="../resources/resources_client/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"></link>
+        <!-- Custom styles for this template-->
+        <link href="../resources/resources_client/css/sb-admin.css" rel="stylesheet"></link>
+        <!-- Bootstrap core JavaScript-->
+        <script src="../resources/resources_client/vendor/jquery/jquery.min.js"></script>
+        <script src="../resources/resources_client/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+        <!-- Core plugin JavaScript-->
+        <script src="../resources/resources_client/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    </h:head>
+    <h:body class="bg-dark">
+        <h:form>
+        <div class="container">
+            <div class="card card-login mx-auto mt-5">
+                <div class="card-header">Login</div>
+                <div class="card-body">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <p:inputText id="exampleInputEmail1"  value="#{clientController.selected.idClient}"  class="form-control" placeholder="Enter email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <p:inputText id="exampleInputPassword1" type="password" value="#{clientController.selected.password}"  class="form-control" placeholder="Password" />
+                        </div>
+                        
+                        <h:commandButton value="Login" action="#{clientController.loginClient()}" class="btn btn-primary btn-block"  />
+                    <div class="text-center">
+                    </div>
+                </div>
+            </div>
+        </div>
+            </h:form>
+    </h:body>
+</html>
+

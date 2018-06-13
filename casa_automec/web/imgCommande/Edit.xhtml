@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ImgCommandeEditDlg" widgetVar="ImgCommandeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditImgCommandeTitle}">
+            <h:form id="ImgCommandeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{imgCommandeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditImgCommandeLabel_client}" for="client" />
+                        <p:selectOneMenu id="client" value="#{imgCommandeController.selected.client}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{clientController.itemsAvailableSelectOne}"
+                                           var="clientItem"
+                                           itemValue="#{clientItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditImgCommandeLabel_dateCmd}" for="dateCmd" />
+                        <p:calendar id="dateCmd" pattern="MM/dd/yyyy" value="#{imgCommandeController.selected.dateCmd}" title="#{bundle.EditImgCommandeTitle_dateCmd}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditImgCommandeLabel_dateVue}" for="dateVue" />
+                        <p:calendar id="dateVue" pattern="MM/dd/yyyy" value="#{imgCommandeController.selected.dateVue}" title="#{bundle.EditImgCommandeTitle_dateVue}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditImgCommandeLabel_name}" for="name" />
+                        <p:inputText id="name" value="#{imgCommandeController.selected.name}" title="#{bundle.EditImgCommandeTitle_name}" />
+                        <p:outputLabel value="#{bundle.EditImgCommandeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{imgCommandeController.selected.id}" title="#{bundle.EditImgCommandeTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{imgCommandeController.update}" value="#{bundle.Save}" update="display,:ImgCommandeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ImgCommandeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ImgCommandeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

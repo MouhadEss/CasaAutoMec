@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <ui:composition template="../admin_template.xhtml">
+
+        <ui:define name="body">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-envelope-o fa-fw"></i> Messages
+                    </div>
+                    <div class="panel-body">
+                        <p:repeat value="#{messageController.items}" var="item">
+                            
+                                 <div>
+                                     <h4><strong><h:outputText value="#{item.nom}"/></strong></h4>
+                                        <span class="pull-right text-muted">
+                                            <em><h:outputText value="#{messageController.formaterDate(item.dateEnvoie)}" /></em>
+                                        </span>
+                                    </div>
+                            Nom de societe:&nbsp;<strong><h:outputText value="#{item.nomSociete}"/> </strong>  <br/> 
+                                Email:&nbsp;<strong><h:outputText value="#{item.email}"/></strong><br/>
+                                Objet:&nbsp;<strong><h:outputText value="#{item.objet}"/></strong><br/>
+                                    Contenue:<br/><strong><h:outputText value="#{item.contenue}"/></strong>
+                            <hr></hr>
+                        </p:repeat>
+                    </div>
+                </div>
+            </div>
+        </ui:define>
+
+    </ui:composition>
+</html>
+

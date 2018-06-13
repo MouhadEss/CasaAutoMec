@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="../client_template.xhtml">
+        <ui:define name="titleBody">
+            Validation de votre Commande:
+        </ui:define>
+        <ui:define name="body">
+
+
+
+
+            <div class=" card mb-3">
+                <h:form id="table">
+                    <div class="card-header">
+                        Les produits commandés:
+                    </div>
+                    <h:dataTable value="#{produitController.itemsC}" var="item" class="table">
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Reference du produit"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produit.reference}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Description du produit"/>
+                            </f:facet>
+                            <h:outputText value="#{item.produit.description}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Entrer le nombre de produit desirer"/>
+                            </f:facet>
+                            <h:inputText value="#{item.nbrProduit}"  class="form-control" />
+                        </h:column>
+                        <h:column>
+                            <p:commandButton actionListener="#{produitController.deleteFromCart(item)}" update=":table" class="btn btn-warning" style="border-style: hidden" icon="ui-icon-trash"></p:commandButton>
+                        </h:column>
+                    </h:dataTable>
+                    <div class="card-footer">
+                            <h:commandButton value="Valider" class=" btn btn-primary btn-block"  action="#{produitController.createCmd()}" />
+                    </div>
+                </h:form>
+            </div>
+
+
+
+        </ui:define>
+    </ui:composition>
+
+</html>
+

@@ -1,0 +1,196 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+
+    <ui:composition template="../admin_template.xhtml">
+        <ui:define name="head">
+            <!-- DataTables CSS -->
+            <link href="../resources/resources_admin/vendor/datatables-plugins/dataTables.bootstrap.css" rel="stylesheet"></link>
+
+            <!-- DataTables Responsive CSS -->
+            <link href="../resources/resources_admin/vendor/datatables-responsive/dataTables.responsive.css" rel="stylesheet"></link>
+
+            <script src="../resources/resources_admin/vendor/datatables/js/jquery.dataTables.min.js"></script>
+            <script src="../resources/resources_admin/vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
+            <script src="../resources/resources_admin/vendor/datatables-responsive/dataTables.responsive.js"></script>
+
+
+        </ui:define>
+        <ui:define name="title-page">Gestion des compte clients:</ui:define>
+        <ui:define name="body">
+            <h:form id="tableform">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <div class="row">
+                                        <div class="col-xs-5 ">
+                                            <h5><strong>List des clients existants</strong></h5>
+                                        </div>
+                                        <div class="col-xs-2">
+                                            </div>
+                                        <div class="col-xs-5">
+                                            
+                                                <p:inputText id="ss" class="form-control" placeholder="Search" value="#{clientController.search}">
+                                                    <p:ajax process="ss" update="table" listener="#{clientController.chercherClients()}" event="keyup"/>
+                                                </p:inputText>
+                                        </div>
+                                    </div>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <h:dataTable  value="#{clientController.items}" var="item" class="table" id="table">
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="IdClient"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.idClient}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="NomClient"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.nomClient}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="PrenomClient"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.prenomClient}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Cin"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.cin}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Email"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.email}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Tel"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.tel}"/>
+                                    </h:column>
+
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="NomSociete"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.nomSociete}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="Adresse"/>
+                                        </f:facet>
+                                        <h:outputText value="#{item.adresse}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+                                            <h:outputText value="bloquer"/>
+                                        </f:facet>
+                                        <h:outputText value="#{clientController.isBloqued(item)}"/>
+                                    </h:column>
+                                    <h:column>
+                                        <f:facet name="header">
+
+                                        </f:facet>
+                                        <p:commandButton class="btn btn-warning btn-circle" icon="fa fa-times" actionListener="#{clientController.supprimerClient(item)}" update=":display,:tableform,:growl" />
+                                        <p:commandButton class="btn btn-danger btn-circle" icon="fa fa-ban" actionListener="#{clientController.bloquer(item)}" update=":tableform,:growl"/>
+                                        <p:commandButton class="btn btn-primary btn-circle" icon="fa fa-edit" actionListener="#{clientController.editClient(item)}" update=":display" />
+
+                                    </h:column>
+                                </h:dataTable>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </h:form>
+
+            <h:form id="display">
+
+                <div  class="panel panel-default">
+
+                    <div class="panel-heading">Creation d'un nouveau client:</div>
+                    <div class="panel-body">
+
+                        <div class="form-group">
+                            <label for="exampleInputId">Id Client</label>
+                            <p:inputText value="#{clientController.selected.idClient}" class="form-control" id="exampleInputId" placeholder="Enter Id" readonly="#{clientController.readonly}" />
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="exampleInputName">Nom</label>
+                                    <p:inputText value="#{clientController.selected.nomClient}" class="form-control" id="exampleInputName" placeholder="Enter first name"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="exampleInputLastName">Prenom</label>
+                                    <p:inputText value="#{clientController.selected.prenomClient}" class="form-control" id="exampleInputLastName" placeholder="Enter last name"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address</label>
+                            <p:inputText value="#{clientController.selected.email}" class="form-control" id="exampleInputEmail1" type="email" placeholder="Enter email"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="exampleConfirmS">Nom de la societe</label>
+                                    <p:inputText value="#{clientController.selected.nomSociete}" class="form-control" id="exampleConfirmS" placeholder="Nom societé" />
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="exampleInputAdresse">Adresse</label>
+                                    <p:inputText value="#{clientController.selected.adresse}" class="form-control" id="exampleInputAdresse" placeholder="Adresse"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="exampleConfirmTel">Numero du telephone:</label>
+                                    <p:inputText value="#{clientController.selected.tel}" class="form-control" id="exampleConfirmTel" placeholder="Telephone"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="exampleInputCin">CIN</label>
+                                    <p:inputText value="#{clientController.selected.cin}" class="form-control" id="exampleInputCin" placeholder="Adresse"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <p:inputText value="#{clientController.selected.password}" class="form-control" id="exampleInputPassword1" type="password" placeholder="Password"/>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="exampleConfirmPassword">Confirm password</label>
+                                    <p:inputText value="#{clientController.confirmePwd}" class="form-control" id="exampleConfirmPassword" type="password" placeholder="Confirm password"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-md-offset-3">
+                            <p:commandButton value="Register" actionListener="#{clientController.createC()}" class="btn btn-primary btn-block" update="display,:growl,:tableform:table" />
+                        </div>
+                        <div class="text-center">
+                        </div>
+                    </div>
+                </div>
+            </h:form>
+            
+        </ui:define>
+    </ui:composition>
+</html>
+

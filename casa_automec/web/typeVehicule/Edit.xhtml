@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="TypeVehiculeEditDlg" widgetVar="TypeVehiculeEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditTypeVehiculeTitle}">
+            <h:form id="TypeVehiculeEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{typeVehiculeController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditTypeVehiculeLabel_vehicule}" for="vehicule" />
+                        <p:inputText id="vehicule" value="#{typeVehiculeController.selected.vehicule}" title="#{bundle.EditTypeVehiculeTitle_vehicule}" />
+                        <p:outputLabel value="#{bundle.EditTypeVehiculeLabel_id}" for="id" />
+                        <p:inputText id="id" value="#{typeVehiculeController.selected.id}" title="#{bundle.EditTypeVehiculeTitle_id}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{typeVehiculeController.update}" value="#{bundle.Save}" update="display,:TypeVehiculeListForm:datalist,:growl" oncomplete="handleSubmit(args, 'TypeVehiculeEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="TypeVehiculeEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
